@@ -18,11 +18,7 @@ interface TriviaFormProps {
 }
 
 const TriviaForm = ({ generateQuestions }: TriviaFormProps) => {
-    const { register, handleSubmit } = useForm<TriviaFormInputs>({
-        defaultValues: {
-            difficulty: 'medium',
-        }
-    });
+    const { register, handleSubmit } = useForm<TriviaFormInputs>();
 
     const onSubmit: SubmitHandler<TriviaFormInputs> = data => generateQuestions(data);
 

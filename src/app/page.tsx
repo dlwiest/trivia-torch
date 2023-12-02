@@ -1,23 +1,24 @@
 'use client';
 
+import { useGenerateQuestions } from '@/api/hooks/useGenerateQuestions';
 import Card from '@/components/global/Card/Card';
 import DarkModeToggle from '@/components/global/DarkModeToggle/DarkModeToggle';
 import Spinner from '@/components/global/Spinner/Spinner';
 import TriviaForm from '@/components/pages/Home/TriviaForm';
+import { Transition } from '@headlessui/react';
 import { ArrowSmallLeftIcon } from '@heroicons/react/20/solid';
-import { useState } from 'react';
 
 export type TriviaFormInputs = {
-    topic?: string;
+    topic: string;
     difficulty: 'easy' | 'medium' | 'hard';
 };
 
 export default function Home() {
-    const [isLoadingQuestions, setIsLoadingQuestions] = useState(false);
+    const questionsRequest = useGenerateQuestions();
 
     const generateQuestions = (data: TriviaFormInputs) => {
-        if (!isLoadingQuestions) {
-            setIsLoadingQuestions(true);
+        if (!questionsRequest.isLoading) {
+            questionsRequest.mutate(data);
         }
     };
 
@@ -39,23 +40,31 @@ export default function Home() {
                 <div className="col-span-4 w-full">
                     <div>
                         <div className="invisible md:visible">
-                            {!isLoadingQuestions &&
+                            <h2 className="text-xl text-zinc-700 dark:text-zinc-200">Next Round</h2>
+                            {!questionsRequest.isLoading && !questionsRequest.data &&
                                 <>
-                                    <h2 className="text-xl text-zinc-700 dark:text-zinc-200">Next Round</h2>
                                     <div className="text-zinc-500 mt-2 flex items-center">
                                         <ArrowSmallLeftIcon className="w-6 h-6 mr-2" />
-                                        <p className="text-md text-zinc-600">Submit the form to generate trivia questions.</p>
+                                        <p className="text-md text-zinc-600 dark:text-zinc-500">Submit the form to generate trivia questions.</p>
                                     </div>
                                 </>
                             }
                         </div>
 
-                        {isLoadingQuestions &&
+                        <Transition
+                            show={questionsRequest.isLoading}
+                            enter="transition-opacity duration-100"
+                            enterFrom="opacity-0"
+                            enterTo="opacity-100"
+                            leave="transition-opacity duration-0"
+                            leaveFrom="opacity-100"
+                            leaveTo="opacity-0"
+                        >
                             <div className="h-48 flex flex-col items-center justify-center">
                                 <Spinner />
-                                <span className="text-sm mt-2 text-zinc-700">Querying AI...</span>
+                                <span className="text-sm mt-2 text-zinc-600 dark:text-zinc-500">Querying AI...</span>
                             </div>
-                        }
+                        </Transition>
                     </div>
                 </div>
             </div>
