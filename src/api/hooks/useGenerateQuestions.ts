@@ -5,11 +5,12 @@ interface PostQuestionParams {
     difficulty: string;
 }
 
-interface QuestionResponse {
-    questions: any[]; // TODO - Define a question type in a shared location
+export interface QAItem {
+    question: string;
+    answer: string;
 }
 
-async function generateQuestions({ topic, difficulty }: PostQuestionParams): Promise<QuestionResponse> {
+async function generateQuestions({ topic, difficulty }: PostQuestionParams): Promise<QAItem[]> {
     const response = await fetch('/api/ai/questions/generate', {
         method: 'POST',
         headers: {
@@ -25,6 +26,6 @@ async function generateQuestions({ topic, difficulty }: PostQuestionParams): Pro
     return response.json();
 }
 
-export function useGenerateQuestions(): UseMutationResult<QuestionResponse, Error, PostQuestionParams> {
+export function useGenerateQuestions(): UseMutationResult<QAItem[], Error, PostQuestionParams> {
     return useMutation(generateQuestions);
 }
