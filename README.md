@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Trivia Torch
+
+Trivia Torch is a Next.js application that leverages OpenAI's powerful language models to generate trivia questions based on user-specified topics. Dive into a world of endless trivia and challenge your knowledge on a variety of subjects!
+
+## Features
+
+- **Dynamic Trivia Generation**: Generate trivia questions on any topic of your choice.
+- **Customizable Difficulty**: Tailor the trivia difficulty to your preference.
 
 ## Getting Started
 
-First, run the development server:
+Follow these instructions to get a copy of Trivia Torch up and running on your local machine for development and testing purposes.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Prerequisites
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ensure you have the following installed:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Node.js (LTS version)
+- npm (comes with Node.js)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Installation
 
-## Learn More
+1. **Clone the repository**
 
-To learn more about Next.js, take a look at the following resources:
+    ```bash
+    git clone https://github.com/yourusername/trivia-torch.git
+    cd trivia-torch
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **Install dependencies**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+    ```bash
+    npm install
+    ```
 
-## Deploy on Vercel
+3. **Set up the environment variables**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    - Find the `.env.example` file in the root directory.
+    - Add your OpenAI API key to the file:
+  
+      ```env
+      OPENAI_API_KEY=your_openai_api_key_here
+      ```
+  
+    - Rename `.env.example` to `.env` to ensure the application recognizes your API key.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+4. **Run the development server**
+
+    ```bash
+    npm run dev
+    ```
+
+    Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+
+## Usage
+
+Once the application is running:
+
+1. Navigate to the main page.
+2. Enter a topic you're interested in generating trivia questions for.
+3. Choose the difficulty
+4. Hit the "Generate" button and wait for the trivia questions to appear!
+
+## Contributing
+
+Contributions are welcome and greatly appreciated! For major changes, please open an issue first to discuss what you would like to change.
+
+Please ensure to update tests as appropriate.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+## Acknowledgements
+
+- Next.js - The React framework used
+- OpenAI - For providing the API used to generate trivia questions
