@@ -5,7 +5,7 @@ import Button from '@/components/global/Button/Button';
 import FormGroup from '@/components/global/FormGroup/FormGroup';
 import Input from '@/components/global/Input/Input';
 import Select from '@/components/global/Select/Select';
-import { TriviaFormInputs } from '@/app/page';
+import { TriviaFormInputs } from '@/app/Home/page';
 
 const difficultyOptions = [
     { name: 'Easy', value: 'easy' },
