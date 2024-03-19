@@ -23,7 +23,7 @@ interface KeyModalProviderProps {
 export const KeyModalProvider: React.FC<KeyModalProviderProps> = ({ children }) => {
     const [showModal, setShowModal] = useState(false);
 
-    const toggleModal = (callback?: () => void) => {
+    const toggleModal = () => {
         setShowModal(prevShowModal => !prevShowModal);
     };
 

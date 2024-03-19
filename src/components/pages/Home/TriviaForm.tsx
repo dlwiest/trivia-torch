@@ -5,16 +5,15 @@ import { Button } from '@dlwiest/taila';
 import FormGroup from '@/components/global/atomic/FormGroup/FormGroup';
 import { Input, Select, SelectItem } from '@dlwiest/taila';
 import { TriviaFormInputs } from '@/app/Home/page';
-import { useLocalStorage } from '@/hooks/useLocalStorage';
-import { useKeyModal } from '@/app/context/KeyModalProvider';
+import { useKeyModal } from '@/context/KeyModalProvider';
+import { useKeyStore } from '@/state/keyStore';
 
 interface TriviaFormProps {
     generateQuestions: (data: TriviaFormInputs) => void;
 }
 
 const TriviaForm = ({ generateQuestions }: TriviaFormProps) => {
-    const [apiKey] = useLocalStorage('openai-api-key', '');
-    console.log('apiKey', apiKey);
+    const apiKey = useKeyStore(state => state.apiKey);
     const { toggleModal } = useKeyModal();
     
     const { control, handleSubmit, getValues, formState: { errors } } = useForm<TriviaFormInputs>({
@@ -23,6 +22,7 @@ const TriviaForm = ({ generateQuestions }: TriviaFormProps) => {
             difficulty: 'medium',
         }
     });
+
     const onSubmit: SubmitHandler<TriviaFormInputs> = data => {
         if (!apiKey) {
             toggleModal();
@@ -47,6 +47,7 @@ const TriviaForm = ({ generateQuestions }: TriviaFormProps) => {
                             hasError={!!errors.topic}
                             defaultValue={getValues('topic')}
                             className="bg-zinc-50 dark:bg-zinc-900"
+                            autoFocus
                         />
                     )}
                 />

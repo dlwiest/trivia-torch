@@ -1,4 +1,4 @@
-import { useKeyModal } from '@/app/context/KeyModalProvider';
+import { useKeyModal } from '@/context/KeyModalProvider';
 
 const KeyIcon = (props: React.ComponentPropsWithoutRef<'svg'>) => {
     return (

@@ -3,7 +3,7 @@
 import { ThemeProvider } from 'next-themes';
 import { createContext, useMemo } from 'react';
 import { QueryClientProvider, QueryClient } from 'react-query';
-import { KeyModalProvider } from './context/KeyModalProvider';
+import { KeyModalProvider } from '../context/KeyModalProvider';
 
 const AppContext = createContext({});
 

@@ -2,9 +2,9 @@ import { Button, Input, Modal } from '@dlwiest/taila';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 import FormGroup from '../atomic/FormGroup/FormGroup';
-import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { useEffect } from 'react';
-import { KeyModalContextType } from '@/app/context/KeyModalProvider';
+import { KeyModalContextType } from '@/context/KeyModalProvider';
+import { useKeyStore } from '@/state/keyStore';
 
 const header = (
     <span className="text-indigo-500 dark:text-indigo-400 font-semibold text-lg">API Key</span>
@@ -28,10 +28,16 @@ const KeyModal = ({ showModal, toggleModal }: KeyModalContextType) => {
         }
     });
 
-    const [apiKey, setApiKey] = useLocalStorage('openai-api-key', '');
+    const apiKey = useKeyStore(state => state.apiKey);
+    const setApiKey = useKeyStore(state => state.setApiKey);
+
+    /*
+    useEffect(() => {
+        setApiKey('')
+    }, [setApiKey])
+    */
 
     useEffect(() => {
-        //setApiKey('');
         if (apiKey) {
             setValue('key', apiKey);
         }
@@ -57,7 +63,7 @@ const KeyModal = ({ showModal, toggleModal }: KeyModalContextType) => {
                         <Controller
                             control={control}
                             name="key"
-                            rules={{ required: false }}
+                            rules={{ required: true }}
                             render={({ field: { onChange } }) => (
                                 <Input
                                     id="topic"
@@ -67,6 +73,7 @@ const KeyModal = ({ showModal, toggleModal }: KeyModalContextType) => {
                                     hasError={!!errors.key}
                                     defaultValue={getValues('key')}
                                     className="bg-zinc-50 dark:bg-zinc-900"
+                                    autoFocus
                                 />
                             )}
                         />
