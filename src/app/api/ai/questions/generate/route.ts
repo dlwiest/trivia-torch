@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
     try {
         const response = await aiGenerateQuestions(inputs);
         if (!response.understoodTopic) {
-            return new NextResponse(JSON.stringify('Invalid Topic'), {
+            return new NextResponse('invalid_topic', {
                 status: 400,
                 headers: {
                     'Content-Type': 'application/json',

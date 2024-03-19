@@ -1,14 +1,15 @@
 'use client';
 
+import { Transition } from '@headlessui/react';
+import { ArrowSmallLeftIcon } from '@heroicons/react/20/solid';
 import { useGenerateQuestions } from '@/api/generateQuestions';
 import Card from '@/components/global/atomic/Card/Card';
 import DarkModeToggle from '@/components/global/DarkModeToggle/DarkModeToggle';
 import Spinner from '@/components/global/atomic/Spinner';
 import TriviaForm from '@/components/pages/Home/TriviaForm';
-import { Transition } from '@headlessui/react';
-import { ArrowSmallLeftIcon } from '@heroicons/react/20/solid';
-import QuestionsList from './QuestionsList';
+import QuestionsList from '../../components/pages/Home/QuestionsList';
 import KeyButton from '@/components/global/KeyButton/KeyButton';
+import ResponseErrorDisplay from '@/components/pages/Home/ResponseErrorDisplay';
 
 export interface TriviaFormInputs {
     topic: string;
@@ -17,6 +18,8 @@ export interface TriviaFormInputs {
 
 const Home = () => {
     const { data: qaItems, error, isLoading: isLoadingQuestions, mutate: requestQuestions } = useGenerateQuestions();
+
+    console.log('front end got an error back', error);
 
     const generateQuestions = (data: TriviaFormInputs) => {
         if (!isLoadingQuestions) {
@@ -44,7 +47,7 @@ const Home = () => {
 
                 <div className="col-span-4 w-full">
                     <div>
-                        {!isLoadingQuestions && !qaItems &&
+                        {!isLoadingQuestions && !qaItems && !error &&
                             <div className="invisible md:visible">
                                 <>
                                     <div className="text-zinc-600 dark:text-zinc-400 mt-2 flex items-center">
@@ -65,6 +68,15 @@ const Home = () => {
                                 <Spinner />
                                 <span className="text-sm mt-2 text-zinc-600 dark:text-zinc-500">Researching...</span>
                             </div>
+                        </Transition>
+
+                        <Transition
+                            show={!isLoadingQuestions && !!error}
+                            enter="transition-opacity duration-100"
+                            enterFrom="opacity-0"
+                            enterTo="opacity-100"
+                        >
+                            <ResponseErrorDisplay errorType={error ? error.toString() : ''} />
                         </Transition>
 
                         <Transition
