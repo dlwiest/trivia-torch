@@ -31,12 +31,6 @@ const KeyModal = ({ showModal, toggleModal }: KeyModalContextType) => {
     const apiKey = useKeyStore(state => state.apiKey);
     const setApiKey = useKeyStore(state => state.setApiKey);
 
-    /*
-    useEffect(() => {
-        setApiKey('')
-    }, [setApiKey])
-    */
-
     useEffect(() => {
         if (apiKey) {
             setValue('key', apiKey);
@@ -55,7 +49,7 @@ const KeyModal = ({ showModal, toggleModal }: KeyModalContextType) => {
             header={header}
             footer={footer(toggleModal, handleSubmit(onSubmit))}
         >
-            <div>
+            <div className="mb-6">
                 <p className="text-sm mb-4">TriviaTorch requires an OpenAI API key to generate trivia questions. Generate a key on the <a href="https://platform.openai.com/api-keys" target="_blank" rel="noreferrer" className="text-indigo-500 dark:text-indigo-400">OpenAI website</a> and paste it below.</p>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -73,6 +67,7 @@ const KeyModal = ({ showModal, toggleModal }: KeyModalContextType) => {
                                     hasError={!!errors.key}
                                     defaultValue={getValues('key')}
                                     className="bg-zinc-50 dark:bg-zinc-900"
+                                    type="password"
                                     autoFocus
                                 />
                             )}

@@ -1,4 +1,4 @@
-import { useForm, Controller, SubmitHandler } from 'react-hook-form';
+'use client';import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { Button } from '@dlwiest/taila';
 import FormGroup from '@/components/global/atomic/FormGroup/FormGroup';
 import { Input, Select, SelectItem } from '@dlwiest/taila';
@@ -64,7 +64,7 @@ const TriviaForm = ({ generateQuestions }: TriviaFormProps) => {
                     )}
                 />
             </FormGroup>
-            <div className="mt-2 w-full text-right">
+            <div className="mt-1 w-full text-right">
                 <Button type="submit" color="indigo">Submit</Button>
             </div>
         </form>

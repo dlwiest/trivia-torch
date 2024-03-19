@@ -28,15 +28,15 @@ const Home = () => {
 
     return (
         <main className="flex min-h-screen flex-col items-center p-2 sm:p-24 sm:pt-4">
-            <div className="w-full flex justify-end sm:pb-20 invisible sm:visible">
+            <div className="w-full max-w-4xl flex justify-end sm:pb-20">
                 <div className="flex space-x-2">
                     <KeyButton />
                     <DarkModeToggle />
                 </div>
             </div>
 
-            <div className="w-full max-w-3xl text-left mb-4">
-                <div className="flex items-end -ml-2">
+            <div className="w-full max-w-4xl text-center sm:text-left mb-4">
+                <div className="flex items-end justify-center sm:justify-start -ml-2 mt-4 sm:mt-0">
                     <FireIcon className="w-10 h-10 text-red-600 dark:text-red-500" />
                     <h1 className="text-4xl font-semibold">
                         TriviaTorch
@@ -44,8 +44,8 @@ const Home = () => {
                 </div>
                 <span className="text-md text-zinc-500 dark:text-zinc-400">An AI-powered trivia night companion</span>
             </div>
-            <div className="w-full max-w-3xl grid grid-cols-1 md:grid-cols-7 sm:gap-8">
-                <Card className="col-span-3 w-full h-64">
+            <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-7 sm:gap-8">
+                <Card className="col-span-3 w-full h-64 mb-6">
                     <TriviaForm generateQuestions={generateQuestions} />
                 </Card>
 
@@ -89,7 +89,7 @@ const Home = () => {
                             enterFrom="opacity-0"
                             enterTo="opacity-100"
                         >
-                            {!!qaItems?.length && <h2 className="text-xl font-semibold">Next Round</h2>}
+                            {!!qaItems?.length && <h2 className="text-xl font-semibold text-center sm:text-left">Next Round</h2>}
                         </Transition>
                         <QuestionsList qaItems={qaItems && !isLoadingQuestions ? qaItems : []} />
                     </div>
