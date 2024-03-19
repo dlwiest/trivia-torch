@@ -1,5 +1,3 @@
-'use client';
-
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { Button } from '@dlwiest/taila';
 import FormGroup from '@/components/global/atomic/FormGroup/FormGroup';

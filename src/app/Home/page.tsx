@@ -2,6 +2,7 @@
 
 import { Transition } from '@headlessui/react';
 import { ArrowSmallLeftIcon } from '@heroicons/react/20/solid';
+import { FireIcon } from '@heroicons/react/24/outline';
 import { useGenerateQuestions } from '@/api/generateQuestions';
 import Card from '@/components/global/atomic/Card/Card';
 import DarkModeToggle from '@/components/global/DarkModeToggle/DarkModeToggle';
@@ -19,8 +20,6 @@ export interface TriviaFormInputs {
 const Home = () => {
     const { data: qaItems, error, isLoading: isLoadingQuestions, mutate: requestQuestions } = useGenerateQuestions();
 
-    console.log('front end got an error back', error);
-
     const generateQuestions = (data: TriviaFormInputs) => {
         if (!isLoadingQuestions) {
             requestQuestions(data);
@@ -37,7 +36,12 @@ const Home = () => {
             </div>
 
             <div className="w-full max-w-3xl text-left mb-4">
-                <h1 className="text-4xl font-semibold">TriviaTorch</h1>
+                <div className="flex items-end -ml-2">
+                    <FireIcon className="w-10 h-10 text-red-600 dark:text-red-500" />
+                    <h1 className="text-4xl font-semibold">
+                        TriviaTorch
+                    </h1>
+                </div>
                 <span className="text-md text-zinc-500 dark:text-zinc-400">An AI-powered trivia night companion</span>
             </div>
             <div className="w-full max-w-3xl grid grid-cols-1 md:grid-cols-7 sm:gap-8">

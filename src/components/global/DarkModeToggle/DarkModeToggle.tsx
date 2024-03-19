@@ -1,5 +1,3 @@
-'use client';
-
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import { SunIcon } from '@heroicons/react/24/outline';

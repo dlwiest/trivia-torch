@@ -23,7 +23,6 @@ async function generateQuestions({ topic, difficulty, apiKey }: PostQuestionPara
 
     if (!response.ok) {
         const errorText = await response.text();
-        console.log('response error body', errorText);
         throw errorText;
     }
 
