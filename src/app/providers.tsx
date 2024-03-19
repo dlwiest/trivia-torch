@@ -3,6 +3,7 @@
 import { ThemeProvider } from 'next-themes';
 import { createContext, useMemo } from 'react';
 import { QueryClientProvider, QueryClient } from 'react-query';
+import { KeyModalProvider } from './context/KeyModalProvider';
 
 const AppContext = createContext({});
 
@@ -13,7 +14,9 @@ const Providers = ({ children }: { children: React.ReactNode; }) => {
         <AppContext.Provider value={{}}>
             <ThemeProvider attribute="class" disableTransitionOnChange>
                 <QueryClientProvider client={queryClient}>
-                    {children}
+                    <KeyModalProvider>
+                        {children}
+                    </KeyModalProvider>
                 </QueryClientProvider>
             </ThemeProvider>
         </AppContext.Provider>

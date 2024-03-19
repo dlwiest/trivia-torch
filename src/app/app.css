@@ -1,0 +1,13 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Light mode styles */
+:root.light {
+    @apply text-zinc-700 bg-zinc-100
+}
+
+/* Dark mode styles */
+:root.dark {
+    @apply text-zinc-300 bg-zinc-950
+}

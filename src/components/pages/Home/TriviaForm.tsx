@@ -1,37 +1,72 @@
 'use client';
 
-import { useForm, SubmitHandler } from 'react-hook-form';
-import Button from '@/components/global/Button/Button';
-import FormGroup from '@/components/global/FormGroup/FormGroup';
-import Input from '@/components/global/Input/Input';
-import Select from '@/components/global/Select/Select';
+import { useForm, Controller, SubmitHandler } from 'react-hook-form';
+import { Button } from '@dlwiest/taila';
+import FormGroup from '@/components/global/atomic/FormGroup/FormGroup';
+import { Input, Select, SelectItem } from '@dlwiest/taila';
 import { TriviaFormInputs } from '@/app/Home/page';
-
-const difficultyOptions = [
-    { name: 'Easy', value: 'easy' },
-    { name: 'Medium', value: 'medium' },
-    { name: 'Hard', value: 'hard' },
-];
+import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { useKeyModal } from '@/app/context/KeyModalProvider';
 
 interface TriviaFormProps {
     generateQuestions: (data: TriviaFormInputs) => void;
 }
 
 const TriviaForm = ({ generateQuestions }: TriviaFormProps) => {
-    const { register, handleSubmit } = useForm<TriviaFormInputs>();
-
-    const onSubmit: SubmitHandler<TriviaFormInputs> = data => generateQuestions(data);
+    const [apiKey] = useLocalStorage('openai-api-key', '');
+    console.log('apiKey', apiKey);
+    const { toggleModal } = useKeyModal();
+    
+    const { control, handleSubmit, getValues, formState: { errors } } = useForm<TriviaFormInputs>({
+        defaultValues: {
+            topic: '',
+            difficulty: 'medium',
+        }
+    });
+    const onSubmit: SubmitHandler<TriviaFormInputs> = data => {
+        if (!apiKey) {
+            toggleModal();
+        } else {
+            generateQuestions(data);
+        }
+    };
 
     return (
         <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
             <FormGroup fieldId="topic" label="Topic">
-                <Input id="topic" placeholder="music, history, the Office, etc." required { ...register('topic') } />
+                <Controller
+                    control={control}
+                    name="topic"
+                    rules={{ required: true }}
+                    render={({ field: { onChange } }) => (
+                        <Input
+                            id="topic"
+                            placeholder="music, history, the Office, etc."
+                            focusColor="indigo"
+                            onChange={onChange}
+                            hasError={!!errors.topic}
+                            defaultValue={getValues('topic')}
+                            className="bg-zinc-50 dark:bg-zinc-900"
+                        />
+                    )}
+                />
+
             </FormGroup>
-            <FormGroup fieldId="difficulty" label="Difficulty">
-                <Select id="difficulty" options={difficultyOptions} { ...register('difficulty') } />
+            <FormGroup fieldId="difficulty" label="Difficulty" className="w-96">
+                <Controller
+                    control={control}
+                    name="difficulty"
+                    render={({ field: { onChange } }) => (
+                        <Select aria-label="difficulty" focusColor="indigo" onSelectionChange={onChange} placeholder="Difficulty" defaultSelectedKey={getValues('difficulty')} className="bg-zinc-50 dark:bg-zinc-900">
+                            <SelectItem id="easy" textValue="Easy" focusColor="indigo">Easy</SelectItem>
+                            <SelectItem id="medium" textValue="Medium" focusColor="indigo">Medium</SelectItem>
+                            <SelectItem id="hard" textValue="Hard" focusColor="indigo">Hard</SelectItem>
+                        </Select>
+                    )}
+                />
             </FormGroup>
             <div className="mt-2 w-full text-right">
-                <Button>Submit</Button>
+                <Button type="submit" color="indigo">Submit</Button>
             </div>
         </form>
     );

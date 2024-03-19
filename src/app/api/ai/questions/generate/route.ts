@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
 
 async function aiGenerateQuestions({ topic, difficulty }: RequestBody) {
     const model = new OpenAI({
-        modelName: 'gpt-4',
+        modelName: 'gpt-4-turbo-preview',
         openAIApiKey: process.env.REACT_APP_OPEN_AI_KEY,
         temperature: 0.7,
     });
@@ -69,7 +69,16 @@ async function aiGenerateQuestions({ topic, difficulty }: RequestBody) {
     const formatInstructions = parser.getFormatInstructions();
 
     const prompt = new PromptTemplate({
-        template: `Generate five trivia questions about {topic} with a {difficulty} difficulty level. Provide the correct answer for each question. It's crucial that all provided information, including the correct answers and the distractors, are factually accurate and verified against reliable sources. After generating the questions, please verify each individually for accuracy, and if there’s any doubt that it’s correct, omit it and generate a new one to replace it.\n\n{format_instructions}`,
+        template: `Generate five trivia questions about {topic} that fit the following difficulty criteria: 
+    - Easy: Common knowledge for anyone familiar with the topic.
+    - Medium: Requires more in-depth knowledge, likely from those who have studied the topic or engaged with it significantly.
+    - Hard: Details that are typically only known by experts or enthusiasts deeply involved in the field.
+
+    For this request, the difficulty of questions should be: {difficulty}
+    
+    Ensure each question comes with a correct answer. All information, including answers and any distractors, must be factually accurate and verified against reliable sources. After generating the questions, verify each for accuracy. If there's any doubt about correctness, replace it with a new question.
+    
+    \n\n{format_instructions}`,
         inputVariables: ['difficulty', 'topic'],
         partialVariables: { format_instructions: formatInstructions },
     });
