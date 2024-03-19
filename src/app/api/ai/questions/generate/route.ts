@@ -7,12 +7,13 @@ import { PromptTemplate } from 'langchain/prompts';
 interface RequestBody {
     topic: string;
     difficulty: string;
+    apiKey: string;
 }
 
 export async function POST(req: NextRequest) {
     const inputs = await req.json() as RequestBody;
 
-    if (!inputs.topic || !inputs.difficulty) {
+    if (!inputs.topic || !inputs.difficulty || !inputs.apiKey) {
         return new NextResponse(JSON.stringify('Bad Request'), {
             status: 400,
             headers: {
@@ -39,7 +40,7 @@ export async function POST(req: NextRequest) {
             },
         });
     } catch (error) {
-        return new NextResponse(JSON.stringify('Error fetching questions from OpenAI'), {
+        return new NextResponse(error as string, {
             status: 500,
             headers: {
                 'Content-Type': 'application/json',
@@ -48,10 +49,10 @@ export async function POST(req: NextRequest) {
     }
 }
 
-async function aiGenerateQuestions({ topic, difficulty }: RequestBody) {
+async function aiGenerateQuestions({ topic, difficulty, apiKey }: RequestBody) {
     const model = new OpenAI({
         modelName: 'gpt-4-turbo-preview',
-        openAIApiKey: process.env.REACT_APP_OPEN_AI_KEY,
+        openAIApiKey: apiKey,
         temperature: 0.7,
     });
 
@@ -92,8 +93,13 @@ async function aiGenerateQuestions({ topic, difficulty }: RequestBody) {
         const response = await model.call(input);
         const parsed = parser.parse(response);
         return parsed;
-    } catch (e) {
-        console.error(e);
-        throw Error();
+    } catch (e: any) {
+        if (e.error && e.error.type) {
+            console.error(`Error type: ${e.error.type}`);
+            throw e.error.type;
+        } else {
+            console.error('An unexpected error has occurred');
+            throw 'unknown_error';
+        }
     }
 }

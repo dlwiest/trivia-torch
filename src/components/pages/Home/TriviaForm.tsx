@@ -9,7 +9,7 @@ import { useKeyModal } from '@/context/KeyModalProvider';
 import { useKeyStore } from '@/state/keyStore';
 
 interface TriviaFormProps {
-    generateQuestions: (data: TriviaFormInputs) => void;
+    generateQuestions: (data: TriviaFormInputs, apiKey: string) => void;
 }
 
 const TriviaForm = ({ generateQuestions }: TriviaFormProps) => {
@@ -27,7 +27,7 @@ const TriviaForm = ({ generateQuestions }: TriviaFormProps) => {
         if (!apiKey) {
             toggleModal();
         } else {
-            generateQuestions(data);
+            generateQuestions(data, apiKey);
         }
     };
 
