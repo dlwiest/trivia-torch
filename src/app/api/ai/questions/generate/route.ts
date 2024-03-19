@@ -95,10 +95,8 @@ async function aiGenerateQuestions({ topic, difficulty, apiKey }: RequestBody) {
         return parsed;
     } catch (e: any) {
         if (e.error && e.error.type) {
-            console.error(`Error type: ${e.error.type}`);
             throw e.error.type;
         } else {
-            console.error('An unexpected error has occurred');
             throw 'unknown_error';
         }
     }
