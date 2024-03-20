@@ -60,7 +60,7 @@ const KeyModal = ({ showModal, toggleModal }: KeyModalContextType) => {
                             rules={{ required: true }}
                             render={({ field: { onChange } }) => (
                                 <Input
-                                    id="topic"
+                                    id="key"
                                     placeholder="OpenAI API Key"
                                     focusColor="indigo"
                                     onChange={onChange}
@@ -68,6 +68,7 @@ const KeyModal = ({ showModal, toggleModal }: KeyModalContextType) => {
                                     defaultValue={getValues('key')}
                                     className="bg-zinc-50 dark:bg-zinc-900"
                                     type="password"
+                                    autoComplete="off"
                                     autoFocus
                                 />
                             )}
