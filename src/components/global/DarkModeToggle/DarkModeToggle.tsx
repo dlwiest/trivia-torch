@@ -20,7 +20,7 @@ const DarkModeToggle = () => {
             onClick={() => setTheme(otherTheme)}
         >
             <SunIcon className="h-6 w-6 fill-zinc-100 stroke-zinc-500 transition group-hover:fill-zinc-200 group-hover:stroke-zinc-700 dark:hidden" />
-            <MoonIcon className="hidden h-6 w-6 transition dark:block group-hover:stroke-teal-400 fill-teal-400/10 group-hover:fill-teal-400/20 stroke-teal-500" />
+            <MoonIcon className="hidden h-6 w-6 transition dark:block group-hover:stroke-zinc-300 fill-zinc-300/10 group-hover:fill-zinc-300/20 stroke-zinc-400" />
         </button>
     );
 };

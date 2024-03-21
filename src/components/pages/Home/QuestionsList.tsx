@@ -8,9 +8,9 @@ const QuestionsListItem = ({ qaItem, order }: { qaItem: QAItem; order: number; }
     useEffect(() => {
         const timer = setTimeout(() => {
             setHasMounted(true);
-        }, order * 100); // delay in milliseconds
+        }, order * 100);
 
-        return () => clearTimeout(timer); // cleanup on unmount
+        return () => clearTimeout(timer);
     }, [order]);
 
     return (
@@ -30,11 +30,9 @@ const QuestionsListItem = ({ qaItem, order }: { qaItem: QAItem; order: number; }
 
 const QuestionsList = ({ qaItems }: { qaItems: QAItem[]; }) => {
     return (
-        <>
-            <ul role="list" className="divide-y divide-zinc-300 dark:divide-zinc-800">
-                {qaItems.map((q, i) => <QuestionsListItem qaItem={q} order={i} key={i} />)}
-            </ul>
-        </>
+        <ul role="list" className="divide-y divide-zinc-300 dark:divide-zinc-800">
+            {qaItems.map((q, i) => <QuestionsListItem qaItem={q} order={i} key={i} />)}
+        </ul>
     );
 };
 

@@ -28,7 +28,7 @@ const Home = () => {
 
     return (
         <main className="flex min-h-screen flex-col items-center p-2 sm:p-24 sm:pt-4">
-            <div className="w-full max-w-4xl flex justify-end sm:pb-20">
+            <div className="w-full max-w-4xl flex justify-end pb-4 sm:pb-20">
                 <div className="flex space-x-2">
                     <KeyButton />
                     <DarkModeToggle />
