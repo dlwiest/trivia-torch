@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './app.css';
 import Providers from './providers';
+import { FireIcon } from '@heroicons/react/24/outline';
 
 const inter = Inter({ subsets: ['latin'] });
 

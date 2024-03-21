@@ -2,7 +2,7 @@
 import { Button } from '@dlwiest/taila';
 import FormGroup from '@/components/global/atomic/FormGroup/FormGroup';
 import { Input, Select, SelectItem } from '@dlwiest/taila';
-import { TriviaFormInputs } from '@/app/Home/page';
+import { TriviaFormInputs } from '@/app/home/page';
 import { useKeyModal } from '@/context/KeyModalProvider';
 import { useKeyStore } from '@/state/keyStore';
 

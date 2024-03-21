@@ -11,6 +11,7 @@ import TriviaForm from '@/components/pages/Home/TriviaForm';
 import QuestionsList from '../../components/pages/Home/QuestionsList';
 import KeyButton from '@/components/global/KeyButton/KeyButton';
 import ResponseErrorDisplay from '@/components/pages/Home/ResponseErrorDisplay';
+import Footer from '@/components/global/Footer/Footer';
 
 export interface TriviaFormInputs {
     topic: string;
@@ -101,20 +102,7 @@ const Home = () => {
                 </div>
             </main>
 
-            {/* Footer */}
-            <div className="w-full px-2 sm:px-0 pb-2 pt-8 sm:pb-4 flex justify-center">
-                <footer className="w-full max-w-4xl px-2 sm:px-0 text-zinc-500">
-                    <div className="flex items-center text-zinc-500 mb-1 -ml-1">
-                        <FireIcon className="w-7 h-7" />
-                        <span className="text-xl font-medium">TriviaTorch</span>
-                    </div>
-                    <div className="flex gap-1 items-center">
-                        <span className="text-xs">© 2024 Derrick Wiest</span>
-                        <span className="text-sm">|</span>
-                        <span className="text-xs hover:font-medium"><a href="mailto:me@dlwiest.com">Contact Me</a></span>
-                    </div>
-                </footer>
-            </div>
+            <Footer />
         </div>
     );
 };
