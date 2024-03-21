@@ -27,75 +27,95 @@ const Home = () => {
     };
 
     return (
-        <main className="flex min-h-screen flex-col items-center p-2 sm:p-24 sm:pt-4">
-            <div className="w-full max-w-4xl flex justify-end pb-4 sm:pb-20">
-                <div className="flex space-x-2">
+        <div className="flex min-h-screen flex-col items-center pt-2 sm:pt-4">
+
+            {/* Action Buttons */}
+            <header className="w-full max-w-4xl flex justify-end pb-4 px-2 sm:px-0 sm:pb-20">
+                <div className="flex space-x-1">
                     <KeyButton />
                     <DarkModeToggle />
                 </div>
-            </div>
+            </header>
 
-            <div className="w-full max-w-4xl text-center sm:text-left mb-4">
-                <div className="flex items-end justify-center sm:justify-start -ml-2 mt-4 sm:mt-0">
-                    <FireIcon className="w-10 h-10 text-red-600 dark:text-red-500" />
-                    <h1 className="text-4xl font-semibold">
-                        TriviaTorch
-                    </h1>
+            {/* Body */}
+            <main className="w-full max-w-4xl grow px-2 sm:px-0">
+                <div className="text-center sm:text-left mb-4">
+                    <div className="flex items-end justify-center sm:justify-start -ml-2 mt-4 sm:mt-0">
+                        <FireIcon className="w-10 h-10 text-red-600 dark:text-red-500" />
+                        <h1 className="text-4xl font-semibold">
+                            TriviaTorch
+                        </h1>
+                    </div>
+                    <span className="text-md text-zinc-500 dark:text-zinc-400">An AI-powered trivia night companion</span>
                 </div>
-                <span className="text-md text-zinc-500 dark:text-zinc-400">An AI-powered trivia night companion</span>
-            </div>
-            <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-7 sm:gap-8">
-                <Card className="col-span-3 w-full h-64 mb-6">
-                    <TriviaForm generateQuestions={generateQuestions} />
-                </Card>
+                <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-7 sm:gap-8">
+                    <Card className="col-span-3 w-full h-64 mb-6">
+                        <TriviaForm generateQuestions={generateQuestions} />
+                    </Card>
 
-                <div className="col-span-4 w-full">
-                    <div>
-                        {!isLoadingQuestions && !qaItems && !error &&
-                            <div className="invisible md:visible">
-                                <>
-                                    <div className="text-zinc-600 dark:text-zinc-400 mt-2 flex items-center">
-                                        <ArrowSmallLeftIcon className="w-8 h-8 mr-1" />
-                                        <p className="text-md">Submit the form to generate trivia questions.</p>
-                                    </div>
-                                </>
-                            </div>
-                        }
+                    <div className="col-span-4 w-full">
+                        <div>
+                            {!isLoadingQuestions && !qaItems && !error &&
+                                <div className="invisible md:visible">
+                                    <>
+                                        <div className="text-zinc-600 dark:text-zinc-400 mt-2 flex items-center">
+                                            <ArrowSmallLeftIcon className="w-8 h-8 mr-1" />
+                                            <p className="text-md">Submit the form to generate trivia questions.</p>
+                                        </div>
+                                    </>
+                                </div>
+                            }
 
-                        <Transition
-                            show={isLoadingQuestions}
-                            enter="transition-opacity duration-100"
-                            enterFrom="opacity-0"
-                            enterTo="opacity-100"
-                        >
-                            <div className="h-48 flex flex-col items-center justify-center">
-                                <Spinner />
-                                <span className="text-sm mt-2 text-zinc-600 dark:text-zinc-500">Researching...</span>
-                            </div>
-                        </Transition>
+                            <Transition
+                                show={isLoadingQuestions}
+                                enter="transition-opacity duration-100"
+                                enterFrom="opacity-0"
+                                enterTo="opacity-100"
+                            >
+                                <div className="h-48 flex flex-col items-center justify-center">
+                                    <Spinner />
+                                    <span className="text-sm mt-2 text-zinc-600 dark:text-zinc-500">Researching...</span>
+                                </div>
+                            </Transition>
 
-                        <Transition
-                            show={!isLoadingQuestions && !!error}
-                            enter="transition-opacity duration-100"
-                            enterFrom="opacity-0"
-                            enterTo="opacity-100"
-                        >
-                            <ResponseErrorDisplay errorType={error ? error.toString() : ''} />
-                        </Transition>
+                            <Transition
+                                show={!isLoadingQuestions && !!error}
+                                enter="transition-opacity duration-100"
+                                enterFrom="opacity-0"
+                                enterTo="opacity-100"
+                            >
+                                <ResponseErrorDisplay errorType={error ? error.toString() : ''} />
+                            </Transition>
 
-                        <Transition
-                            show={!isLoadingQuestions && !!qaItems?.length}
-                            enter="transition-opacity duration-100"
-                            enterFrom="opacity-0"
-                            enterTo="opacity-100"
-                        >
-                            {!!qaItems?.length && <h2 className="text-xl font-semibold text-center sm:text-left">Next Round</h2>}
-                        </Transition>
-                        <QuestionsList qaItems={qaItems && !isLoadingQuestions ? qaItems : []} />
+                            <Transition
+                                show={!isLoadingQuestions && !!qaItems?.length}
+                                enter="transition-opacity duration-100"
+                                enterFrom="opacity-0"
+                                enterTo="opacity-100"
+                            >
+                                {!!qaItems?.length && <h2 className="text-xl font-semibold text-center sm:text-left">Next Round</h2>}
+                            </Transition>
+                            <QuestionsList qaItems={qaItems && !isLoadingQuestions ? qaItems : []} />
+                        </div>
                     </div>
                 </div>
+            </main>
+
+            {/* Footer */}
+            <div className="w-full px-2 sm:px-0 pb-2 pt-8 sm:pb-4 flex justify-center">
+                <footer className="w-full max-w-4xl px-2 sm:px-0 text-zinc-500">
+                    <div className="flex items-center text-zinc-500 mb-1 -ml-1">
+                        <FireIcon className="w-7 h-7" />
+                        <span className="text-xl font-medium">TriviaTorch</span>
+                    </div>
+                    <div className="flex gap-1 items-center">
+                        <span className="text-xs">© 2024 Derrick Wiest</span>
+                        <span className="text-sm">|</span>
+                        <span className="text-xs hover:font-medium"><a href="mailto:me@dlwiest.com">Contact Me</a></span>
+                    </div>
+                </footer>
             </div>
-        </main >
+        </div>
     );
 };
 
