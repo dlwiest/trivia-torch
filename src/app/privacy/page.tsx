@@ -11,13 +11,11 @@ const Privacy = () => (
 
             <h2 className="text-xl pb-2">Information Collection and Use</h2>
             <p className="text-sm pb-4">TriviaTorch requires users to provide their own OpenAI API key to generate trivia questions. The API key you provide is used solely for the purpose of generating trivia questions within the app and is not stored, shared, or used for any other purposes.</p>
-
             <h2 className="text-xl pb-2">Data Storage and Security</h2>
-            <p className="text-sm pb-4">TriviaTorch does not store any personal information or OpenAI API keys on its servers. All interactions with OpenAI's API using your key are performed client-side, and your key is not retained after the session ends.</p>
+            <p className="text-sm pb-4">TriviaTorch does not store any personal information or OpenAI API keys on its servers. All interactions with OpenAI&apos;s API using your key are performed client-side, and your key is not retained after the session ends.</p>
 
             <h2 className="text-xl pb-2">User Data</h2>
             <p className="text-sm pb-4">TriviaTorch does not collect, store, or share any personal data of its users. Users are responsible for the security and management of their own OpenAI API keys.</p>
-
             <h2 className="text-xl pb-2">Changes to This Privacy Policy</h2>
             <p className="text-sm pb-4">We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
 
