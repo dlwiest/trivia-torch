@@ -32,7 +32,7 @@ const Home = () => {
 
             {/* Action Buttons */}
             <header className="w-full max-w-4xl flex justify-end pb-4 px-2 sm:px-0 sm:pb-20">
-                <div className="flex space-x-1">
+                <div className="flex space-x-2">
                     <KeyButton />
                     <DarkModeToggle />
                 </div>

@@ -65,7 +65,7 @@ const TriviaForm = ({ generateQuestions }: TriviaFormProps) => {
                 />
             </FormGroup>
             <div className="mt-1 w-full text-right">
-                <Button type="submit" color="indigo">Submit</Button>
+                <Button type="submit" color="indigo">Generate</Button>
             </div>
         </form>
     );
